@@ -72,7 +72,10 @@ class AstroObject(Base):
         nullable=False,
     )
     last_enriched_at: Mapped[datetime | None] = mapped_column(DateTime)
-    hero_file_id: Mapped[int | None] = mapped_column(ForeignKey("files.id"), index=True)
+    hero_file_id: Mapped[int | None] = mapped_column(
+        ForeignKey("files.id", name="fk_objects_hero_file_id_files", use_alter=True),
+        index=True,
+    )
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime,

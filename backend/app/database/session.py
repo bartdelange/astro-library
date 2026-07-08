@@ -1,11 +1,15 @@
+from alembic import command
+from alembic.config import Config
+from alembic.runtime.migration import MigrationContext
 from sqlalchemy import create_engine, inspect, text
 from sqlalchemy.orm import sessionmaker
 
-from app.config import settings
-from app.database.base import Base
+from app.config import BACKEND_DIR, settings
 
 DB_PATH = settings.data_dir / "astro-library.db"
 DATABASE_URL = f"sqlite:///{DB_PATH}"
+ALEMBIC_INI_PATH = BACKEND_DIR / "alembic.ini"
+BASELINE_REVISION = "20260708_0001"
 
 engine = create_engine(
     DATABASE_URL,
@@ -37,14 +41,33 @@ def drop_legacy_session_count_columns() -> None:
             connection.execute(text(f"ALTER TABLE sessions DROP COLUMN {column}"))
 
 
-def init_db():
+def get_alembic_config() -> Config:
+    config = Config(str(ALEMBIC_INI_PATH))
+    config.set_main_option("script_location", str(BACKEND_DIR / "migrations"))
+    config.set_main_option("sqlalchemy.url", DATABASE_URL)
+    return config
+
+
+def database_has_tables() -> bool:
+    return bool(inspect(engine).get_table_names())
+
+
+def database_has_revision() -> bool:
+    with engine.connect() as connection:
+        context = MigrationContext.configure(connection)
+        return context.get_current_revision() is not None
+
+
+def init_db() -> None:
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
 
-    # Import models so SQLAlchemy registers them before create_all()
-    from app import models  # noqa: F401
+    alembic_config = get_alembic_config()
 
-    Base.metadata.create_all(bind=engine)
-    drop_legacy_session_count_columns()
+    if database_has_tables() and not database_has_revision():
+        drop_legacy_session_count_columns()
+        command.stamp(alembic_config, BASELINE_REVISION)
+
+    command.upgrade(alembic_config, "head")
 
 
 def get_db():

@@ -1,0 +1,7 @@
+Alembic migrations for Astro Library.
+
+Common commands:
+
+    uv run alembic revision --autogenerate -m "describe change"
+    uv run alembic upgrade head
+    uv run alembic downgrade -1

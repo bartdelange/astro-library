@@ -1,5 +1,27 @@
 # Backend
 
+## Database Migrations
+
+The backend uses Alembic for schema migrations. The database URL is derived from
+`ASTRO_LIBRARY_DATA_DIR` through `app.config.settings`, so the CLI and app startup use
+the same SQLite database path.
+
+Apply migrations:
+
+```bash
+uv run alembic upgrade head
+```
+
+Create a migration after changing SQLAlchemy models:
+
+```bash
+uv run alembic revision --autogenerate -m "describe change"
+uv run alembic upgrade head
+```
+
+FastAPI startup also runs `upgrade head`. Existing databases created before Alembic are
+stamped at the baseline revision the first time `init_db()` runs, then upgraded normally.
+
 ## Seed Demo Data
 
 The database can be populated with realistic demo astronomy data using Faker and Factory Boy:

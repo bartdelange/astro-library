@@ -22,7 +22,10 @@ class Project(Base):
     name: Mapped[str] = mapped_column(String, nullable=False)
     slug: Mapped[str] = mapped_column(String, index=True, nullable=False)
     path: Mapped[str] = mapped_column(String, unique=True, nullable=False)
-    hero_file_id: Mapped[int | None] = mapped_column(ForeignKey("files.id"), index=True)
+    hero_file_id: Mapped[int | None] = mapped_column(
+        ForeignKey("files.id", name="fk_projects_hero_file_id_files", use_alter=True),
+        index=True,
+    )
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime,
