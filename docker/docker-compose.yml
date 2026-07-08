@@ -1,0 +1,10 @@
+services:
+  astro-library:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../example/data:/data
+      - ../example/library:/library:ro

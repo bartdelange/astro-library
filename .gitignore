@@ -1,10 +1,67 @@
+# Dependencies
 node_modules/
+frontend/node_modules/
+
+# Frontend build output and caches
 frontend/dist/
+frontend/dist-ssr/
+frontend/node_modules/.vite/
+frontend/node_modules/.vite-temp/
+
+# Python virtual environments
+.venv/
+venv/
+env/
 backend/.venv/
+
+# Python caches and build output
 __pycache__/
+*.py[cod]
+*$py.class
 .pytest_cache/
 .ruff_cache/
-.DS_Store
-/data/
-.env
+.mypy_cache/
+.pyre/
+.coverage
+coverage.xml
+htmlcov/
+build/
+dist/
+wheels/
+*.egg-info/
 
+# Local environment files
+backend/.env
+.env.*
+!.env.example
+!.env.template
+*.local
+
+# Local app data and generated databases
+/example/
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.sqlite3-*
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
