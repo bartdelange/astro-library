@@ -276,7 +276,7 @@ def main() -> int:
         ],
         dry_run=dry_run,
     )
-    commit_command = ["git", "commit", "-m", f"chore: release {tag}"]
+    commit_command = ["git", "commit", "-m", f"release: {tag}"]
     push_command = ["git", "push", args.remote, current_branch]
     tag_push_command = ["git", "push", args.remote, tag]
 
