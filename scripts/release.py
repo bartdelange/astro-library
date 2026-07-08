@@ -203,17 +203,6 @@ def configure_interactively(args: argparse.Namespace) -> argparse.Namespace:
     else:
         args.level = choice
 
-    args.dry_run = ask_yes_no("Dry run only", default=True)
-    args.skip_checks = not ask_yes_no("Run checks before committing", default=True)
-
-    if args.dry_run:
-        args.no_publish = False
-    else:
-        args.no_publish = not ask_yes_no("Push and create GitHub release", default=True)
-
-    if not args.no_publish:
-        args.remote = ask("Git remote", args.remote)
-
     return args
 
 
