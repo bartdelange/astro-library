@@ -1,7 +1,7 @@
 # Astro Library
 
 <p align="center">
-  <img src="docs/images/logo.png" alt="Astro Library" width="128">
+  <img src="frontend/public/favicon.svg" alt="Astro Library" width="128">
 </p>
 
 <h3 align="center">
@@ -24,7 +24,12 @@ A self-hosted astrophotography library for organizing, exploring and reliving yo
 </p>
 
 <p align="center">
-  <img src="docs/images/dashboard.png" alt="Dashboard screenshot">
+  <a href="https://github.com/sponsors/bartdelange">
+    <img src="https://img.shields.io/badge/GitHub%20Sponsors-support-EA4AAA?style=for-the-badge&logo=github-sponsors&logoColor=white" alt="GitHub Sponsors">
+  </a>
+  <a href="https://ko-fi.com/bartdelange">
+    <img src="https://img.shields.io/badge/Ko--fi-support-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Ko-fi">
+  </a>
 </p>
 
 ---
@@ -170,6 +175,66 @@ Perfect for:
 
 ---
 
+## Status
+
+Astro Library is early-stage software. It is useful for experimentation and development, but the data model, APIs and UI may still change before a stable release.
+
+Keep backups of your astrophotography library and application data. Astro Library is designed to index and enrich your files, not to be the only copy of them.
+
+---
+
+## Quick Start
+
+### Docker
+
+```bash
+docker compose -f docker/docker-compose.yml up --build
+```
+
+The app will be available at `http://localhost:8080`.
+
+By default, the compose file stores application data in a Docker volume and mounts `example/library` read-only as the library path. Change the `ASTRO_LIBRARY_LIBRARY_DIR` environment variable and volume mount to point at your own astrophotography archive.
+
+### Local Development
+
+Backend:
+
+```bash
+cd backend
+uv sync --all-extras --dev
+cp .env.example .env
+uv run uvicorn app.main:app --reload
+```
+
+Frontend:
+
+```bash
+cd frontend
+npm ci
+npm run dev
+```
+
+The frontend runs through Vite and proxies `/api` requests to the backend.
+
+### Checks
+
+```bash
+cd frontend
+npm run format:check
+npm run lint
+npm run typecheck
+npm run build
+```
+
+```bash
+cd backend
+uv run ruff check .
+uv run ruff format --check .
+uv run pytest
+```
+
+---
+
 ## Roadmap
 
 The long-term vision includes:
@@ -191,10 +256,26 @@ Contributions are welcome.
 
 Bug reports, feature requests and pull requests are greatly appreciated.
 
-As the project matures, contribution guidelines and development documentation will be added.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+
+For security issues, please read [SECURITY.md](SECURITY.md).
+
+If Astro Library is useful to you, you can support development through [GitHub Sponsors](https://github.com/sponsors/bartdelange) or [Ko-fi](https://ko-fi.com/bartdelange).
+
+---
+
+## Support
+
+If you enjoy Astro Library, you can help by:
+
+- ⭐ Starring the repository
+- 🐛 Reporting bugs
+- 💡 Suggesting features
+- 🔀 Contributing code or documentation
+- 📣 Sharing the project with other astrophotographers
 
 ---
 
 ## License
 
-License to be determined.
+Astro Library is released under the [MIT License](LICENSE).

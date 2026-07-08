@@ -1,7 +1,7 @@
 [project]
 name = "backend"
 version = "0.0.1"
-description = "Backend worker/api project"
+description = "FastAPI backend for Astro Library"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [

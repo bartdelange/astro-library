@@ -5,6 +5,12 @@ services:
       dockerfile: docker/Dockerfile
     ports:
       - "8080:8080"
+    environment:
+      ASTRO_LIBRARY_DATA_DIR: /data
+      ASTRO_LIBRARY_LIBRARY_DIR: /library
     volumes:
-      - ../example/data:/data
+      - astro-library-data:/data
       - ../example/library:/library:ro
+
+volumes:
+  astro-library-data:
