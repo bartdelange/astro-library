@@ -1,11 +1,13 @@
-name: CI
+name: Lint and Test
 
 on:
   push:
+    branches:
+      - master
   pull_request:
 
 jobs:
-  frontend:
+  frontend-quality:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -20,9 +22,11 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
 
       - run: npm ci
-      - run: npm run build
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm run typecheck
 
-  backend:
+  backend-quality:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -34,4 +38,40 @@ jobs:
       - run: uv sync --all-extras --dev
       - run: uv run ruff check .
       - run: uv run ruff format --check .
-      - run: uv run pytest
+
+  test:
+    runs-on: ubuntu-latest
+    needs:
+      - frontend-quality
+      - backend-quality
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - uses: astral-sh/setup-uv@v7
+
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Build frontend
+        working-directory: frontend
+        run: npm run build
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: uv sync --all-extras --dev
+
+      - name: Test backend
+        working-directory: backend
+        env:
+          ASTRO_LIBRARY_DATA_DIR: ${{ runner.temp }}/astro-library-data
+          ASTRO_LIBRARY_LIBRARY_DIR: ${{ runner.temp }}/astro-library-library
+          ASTRO_LIBRARY_FRONTEND_DIST: ${{ github.workspace }}/frontend/dist
+        run: uv run pytest

@@ -1,6 +1,6 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { AppShell } from "../layout/AppShell";
-import { LibraryPage } from "../../pages/library/LibraryPage";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { AppShell } from '../layout/AppShell';
+import { LibraryPage } from '../../pages/library/LibraryPage';
 
 export function AppRouter() {
   return (
