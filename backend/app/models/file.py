@@ -19,6 +19,7 @@ class FileRole(StrEnum):
     DARK = "DARK"
     FLAT = "FLAT"
     BIAS = "BIAS"
+    DARK_FLAT = "DARK_FLAT"
     EXPORT = "EXPORT"
     EDIT = "EDIT"
     INTERMEDIATE = "INTERMEDIATE"

@@ -21,10 +21,6 @@ class Session(Base):
     date: Mapped[date] = mapped_column(Date, index=True, nullable=False)
     path: Mapped[str] = mapped_column(String, unique=True, nullable=False)
     integration_seconds: Mapped[int | None] = mapped_column(Integer)
-    light_count: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
-    dark_count: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
-    flat_count: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
-    bias_count: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
     notes: Mapped[str | None] = mapped_column(Text)
 
     created_at: Mapped[datetime] = mapped_column(

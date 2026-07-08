@@ -8,10 +8,6 @@ class SessionBase(BaseModel):
     date: dt.date
     path: str
     integration_seconds: int | None = None
-    light_count: int = 0
-    dark_count: int = 0
-    flat_count: int = 0
-    bias_count: int = 0
     notes: str | None = None
 
 
