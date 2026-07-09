@@ -16,7 +16,7 @@ A self-hosted astrophotography library for organizing, exploring and reliving yo
     <img src="https://img.shields.io/badge/Container-GHCR-blue?style=for-the-badge&logo=docker" alt="Container Registry">
   </a>
   <a href="LICENSE">
-    <img src="https://img.shields.io/github/license/bartdelange/astro-library?style=for-the-badge" alt="License">
+    <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
   </a>
   <img src="https://img.shields.io/badge/Python-3.14+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
   <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React">
