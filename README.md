@@ -201,7 +201,7 @@ Backend:
 
 ```bash
 cd backend
-uv sync --all-extras --dev
+uv sync --locked --all-extras --dev
 cp .env.example .env
 uv run uvicorn app.main:app --reload
 ```
@@ -231,6 +231,10 @@ cd backend
 uv run ruff check .
 uv run ruff format --check .
 uv run pytest
+```
+
+```bash
+docker run --rm -v "$PWD:/repo" -w /repo rhysd/actionlint:1.7.7
 ```
 
 ---

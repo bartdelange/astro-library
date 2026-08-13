@@ -17,7 +17,7 @@ Backend:
 
 ```bash
 cd backend
-uv sync --all-extras --dev
+uv sync --locked --all-extras --dev
 cp .env.example .env
 uv run pytest
 uv run ruff check .
@@ -48,20 +48,27 @@ npm run dev
 
 The frontend development server proxies `/api` requests to `http://127.0.0.1:8000`.
 
+Validate GitHub Actions from the repository root:
+
+```bash
+docker run --rm -v "$PWD:/repo" -w /repo rhysd/actionlint:1.7.7
+```
+
 ## Pull Requests
 
 - Keep changes scoped to one concern.
 - Include a clear description of the problem and the fix.
 - Add or update tests for behavior changes.
 - Run the relevant checks before opening the PR.
-- Use conventional commit-style titles, for example `fix: handle empty object library`.
+- Use the repository commit format, for example `🐛 fix(frontend): handle empty object library`.
 
 ## Commit Messages
 
 The repository checks commit messages with:
 
 ```text
-<type>: <message>
+<emoji> <type>(<scope>): <message>
 ```
 
-Allowed types are `chore`, `docs`, `feat`, `fix`, `refactor`, `release`, `revert`, and `test`.
+Allowed types are `chore`, `docs`, `feat`, `fix`, `refactor`, `release`, `revert`, and `test`. Keep
+the complete header within 100 characters and use the narrowest meaningful scope.

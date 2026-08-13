@@ -1,0 +1,41 @@
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /frontend
+    schedule: &weekly
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Amsterdam
+    versioning-strategy: increase
+    commit-message: &commit-message
+      prefix: "⬆️ chore(repo)"
+    groups:
+      compatible-updates:
+        patterns: ["*"]
+      security-updates:
+        applies-to: security-updates
+        patterns: ["*"]
+
+  - package-ecosystem: pip
+    directory: /backend
+    schedule: *weekly
+    commit-message: *commit-message
+    groups:
+      compatible-updates:
+        patterns: ["*"]
+      security-updates:
+        applies-to: security-updates
+        patterns: ["*"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: *weekly
+    commit-message: *commit-message
+    groups:
+      compatible-updates:
+        patterns: ["*"]
+      security-updates:
+        applies-to: security-updates
+        patterns: ["*"]
